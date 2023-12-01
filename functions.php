@@ -1,6 +1,6 @@
 <?php
 // Шаблонизатор
-function include_template($path, $data)
+function include_template($path, $data = [])
 {
 	if (file_exists($path)) {
 		extract($data);
