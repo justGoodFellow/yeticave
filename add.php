@@ -2,15 +2,17 @@
 require_once('functions.php');
 require_once('data.php');
 
+$title = 'Добавление лота';
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-	$required = ['lot-name', 'category', 'message', 'lot-rate', 'lot-step', 'lot-date'];
+	$required = ['name', 'category', 'message', 'price', 'lot-step', 'lot-date'];
 	$errors = [];
 	$lot = $_POST;
 
 	foreach ($required as $key) {
 		if (empty($_POST[$key])) {
 			$errors[$key] = 'Заполните это поле';
-		} elseif ($key === 'lot-rate' || $key === 'lot-step') {
+		} elseif ($key === 'price' || $key === 'lot-step') {
 			if (!is_numeric($_POST[$key])) {
 				$errors[$key] = 'Допустимы только цифры';
 			}
@@ -26,23 +28,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	}
 
 	if (empty($errors)) {
+		$title = $lot['name'];
 		$page_content = include_template('templates/lot.php', ['lot' => $lot]);
 	} else {
 		$page_content = include_template('templates/add.php', [
 			'categories' => $categories,
-			'errors' => $errors
+			'errors' => $errors,
 		]);
 	}
 } else {
 	$page_content = include_template('templates/add.php', [
-		'categories' => $categories
+		'categories' => $categories,
 	]);
 }
 
 $layout_content = include_template('templates/layout.php', [
 	'content' => $page_content,
 	'categories' => $categories,
-	'title' => 'Главная'
+	'title' => $title,
 ]);
 
 print($layout_content);
