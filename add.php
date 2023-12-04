@@ -19,10 +19,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		}
 	}
 
-	if (!empty($_FILES['lot-picture']['name'])) {
-		$path = $_FILES['lot-picture']['name'];
-		move_uploaded_file($_FILES['lot-picture']['tmp_name'], 'img/' . $path);
-		$lot['url'] = 'img/' . $path;
+	if ($_FILES['lot-picture']['error'] === 0) {
+		$file_info = finfo_open(FILEINFO_MIME_TYPE);
+		$tmp_name = $_FILES['lot-picture']['tmp_name'];
+		$file_type = finfo_file($file_info, $tmp_name);
+
+		if ($file_type === 'image/jpeg') {
+			$path = $_FILES['lot-picture']['name'];
+			move_uploaded_file($tmp_name, 'img/' . $path);
+			$lot['url'] = 'img/' . $path;
+		} else {
+			$errors['file'] = 'Загрузите изображение в формате jpeg';
+		}
 	} else {
 		$errors['file'] = 'Вы не загрузили изображение';
 	}
