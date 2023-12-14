@@ -98,6 +98,8 @@ h2 {
 }
 
 .button {
+	font: inherit;
+
 	display: block;
 	padding: 9px 32px;
 	background-color: #45abde;
@@ -160,6 +162,8 @@ h2 {
 }
 
 .main-header__search input[type="search"] {
+	font: inherit;
+
 	width: 100%;
 	padding: 8px 19px 9px 19px;
 	border: 1px solid #ffffff;
@@ -541,6 +545,8 @@ h2 {
 }
 
 .lots__select {
+	font: inherit;
+
 	-webkit-align-self: flex-start;
 	-ms-flex-item-align: start;
 	align-self: flex-start;
@@ -763,6 +769,8 @@ h2 {
 
 .form__item input,
 .form__item textarea {
+	font: inherit;
+
 	display: block;
 	width: 100%;
 	padding: 5px 10px;
@@ -799,6 +807,8 @@ h2 {
 }
 
 .form__item select {
+	font: inherit;
+
 	display: block;
 	width: 350px;
 	padding: 5px 10px;
@@ -1049,6 +1059,8 @@ h2 {
 }
 
 .lot-item__form-item input {
+	font: inherit;
+
 	display: block;
 	width: 130px;
 	padding: 5px 7px;
