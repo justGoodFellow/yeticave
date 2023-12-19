@@ -12,12 +12,26 @@ $bets = [
 
 $lot = null;
 
-if (isset($_GET['lot_index'])) {
-	$lot_index = $_GET['lot_index'];
+if (isset($_GET['lot_id'])) {
+	$lot_id = $_GET['lot_id'];
 
 	foreach ($lots as $item) {
-		if (array_search($item, $lots) == $lot_index) {
+		if ($item['id'] == $lot_id) {
 			$lot = $item;
+
+			if (isset($_COOKIE['viewed_lots_ids'])) {
+				$viewed_lots_ids_value = json_decode($_COOKIE['viewed_lots_ids'], true);
+
+				if (!in_array($lot_id, $viewed_lots_ids_value)) {
+					$viewed_lots_ids_value[] = $lot_id;
+				}
+
+				$viewed_lots_ids_value = json_encode($viewed_lots_ids_value);
+			} else {
+				$viewed_lots_ids_value[] = $lot_id;
+				$viewed_lots_ids_value = json_encode($viewed_lots_ids_value);
+			}
+
 			break;
 		}
 	}
@@ -29,9 +43,17 @@ if (!$lot) {
 	die();
 }
 
+$viewed_lots_ids_name = 'viewed_lots_ids';
+$viewed_lots_ids_value;
+$expire = strtotime('+30 days');
+$path = '/';
+
+setcookie($viewed_lots_ids_name, $viewed_lots_ids_value, $expire, $path);
+
 $page_content = include_template('templates/lot.php', [
 	'lot' => $lot,
 ]);
+
 $layout_content = include_template('templates/layout.php', [
 	'content' => $page_content,
 	'categories' => $categories,
