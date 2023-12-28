@@ -222,8 +222,12 @@ h2 {
 	font-weight: 700;
 }
 
-.user-menu__item a:hover {
+.user-menu__item a[href]:hover {
 	text-decoration: underline;
+}
+
+.user-menu__item a:not([href]):hover {
+	user-select: none;
 }
 
 .user-menu__item a:active {
@@ -997,6 +1001,8 @@ h2 {
 }
 
 .lot-item__state {
+	margin-bottom: 34px;
+
 	padding: 30px;
 	background-color: #ffffff;
 }
@@ -1083,10 +1089,6 @@ h2 {
 }
 
 /* История ставок */
-
-.history {
-	margin-top: 34px;
-}
 
 .history h3 {
 	margin: 0;
