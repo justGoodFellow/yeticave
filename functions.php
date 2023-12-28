@@ -1,4 +1,5 @@
 <?php
+
 // Шаблонизатор
 function include_template($path, $data = [])
 {
@@ -25,4 +26,19 @@ function formatPrice($price)
 	}
 
 	return $price . ' ₽';
+}
+
+// Ищет пользователя по email
+function search_user_by_email($email, $users)
+{
+	$result = null;
+
+	foreach ($users as $user) {
+		if ($user['email'] === $email) {
+			$result = $user;
+			break;
+		}
+	}
+
+	return $result;
 }

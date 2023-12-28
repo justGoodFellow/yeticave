@@ -27,13 +27,28 @@
 			<a class="main-header__add-lot button" <?= $link; ?>>Добавить лот</a>
 
 			<nav class="user-menu">
-				<div class="user-menu__image">
-					<img src="img/user.jpg" width="40" height="40" alt="Пользователь">
-				</div>
-				<div class="user-menu__logged">
-					<p>Константин</p>
-					<a href="#">Выйти</a>
-				</div>
+
+				<?php if (isset($_SESSION['user'])) : ?>
+					<div class="user-menu__image">
+						<img src="../img/user.jpg" width="40" height="40" alt="Пользователь">
+					</div>
+					<div class="user-menu__logged">
+						<p><?= strip_tags($_SESSION['user']['name']); ?></p>
+						<a href="/logout.php">Выйти</a>
+					</div>
+				<?php else : ?>
+					<ul class="user-menu__list">
+						<li class="user-menu__item">
+							<a href="sign-up.html">Регистрация</a>
+						</li>
+						<li class="user-menu__item">
+
+							<?php $link = !($_SERVER['REQUEST_URI'] === '/login.php') ? 'href="/login.php"' : ''; ?>
+							<a <?= $link; ?>>Вход</a>
+						</li>
+					</ul>
+				<?php endif; ?>
+
 			</nav>
 		</div>
 	</header>

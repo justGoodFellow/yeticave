@@ -2,6 +2,8 @@
 require_once('functions.php');
 require_once('data.php');
 
+session_start();
+
 $page_content = include_template('templates/index.php', [
 	'lots' => $lots,
 	'lot_time_remaining' => $lot_time_remaining,

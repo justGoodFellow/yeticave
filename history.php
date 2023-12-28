@@ -2,6 +2,8 @@
 require_once('functions.php');
 require_once('data.php');
 
+session_start();
+
 if (isset($_COOKIE['viewed_lots_ids'])) {
 	$viewed_lots_ids = json_decode($_COOKIE['viewed_lots_ids'], true);
 	$lots_ids_indexes = array_column($lots, 'id');
